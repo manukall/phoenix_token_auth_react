@@ -1,0 +1,9 @@
+# Mix artifacts
+/_build
+/deps
+/*.ez
+
+# Generate on crash by the VM
+erl_crash.dump
+
+node_modules
