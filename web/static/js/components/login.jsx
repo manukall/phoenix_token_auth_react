@@ -3,7 +3,7 @@ var SessionStore = require('../stores/session_store.jsx');
 var SessionActionCreators = require('../actions/session_action_creators.jsx');
 var ErrorNotice = require('../components/common/error_notice.jsx');
 
-var Signup = React.createClass({
+var Login = React.createClass({
   getInitialState: function() {
     return { errors: [] };
   },
@@ -26,13 +26,8 @@ var Signup = React.createClass({
     this.setState({ errors: [] });
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
-    var passwordConfirmation = this.refs.passwordConfirmation.getDOMNode().value;
-    if (password !== passwordConfirmation) {
-      console.log("no matcvht");
-      this.setState({ errors: ['Password and password confirmation should match']});
-    } else {
-      SessionActionCreators.signup(email, password, passwordConfirmation);
-    }
+
+    SessionActionCreators.login(email, password);
   },
 
   render: function() {
@@ -43,7 +38,7 @@ var Signup = React.createClass({
 
         <div className="row">
           <form className="form-signin" onSubmit={this._onSubmit}>
-            <h2 className="form-signin-heading">Please sign up below</h2>
+            <h2 className="form-signin-heading">Please log in below</h2>
 
             <label htmlFor="inputEmail" className="sr-only">Email address</label>
             <input ref="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" required autofocus />
@@ -51,10 +46,7 @@ var Signup = React.createClass({
             <label htmlFor="inputPassword" className="sr-only">Password</label>
             <input ref="password" type="password" id="inputPassword" className="form-control" placeholder="Password" required />
 
-            <label htmlFor="inputPasswordConfirmation" className="sr-only">Password confirmation</label>
-            <input ref="passwordConfirmation" type="password" id="inputPasswordConfirmation" className="form-control" placeholder="Password confirmation" required />
-
-            <button className="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+            <button className="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
           </form>
         </div>
       </div>
@@ -62,4 +54,4 @@ var Signup = React.createClass({
   }
 });
 
-module.exports = Signup;
+module.exports = Login;

@@ -6,10 +6,12 @@ var DefaultRoute = Router.DefaultRoute;
 var App = require('./components/app.jsx');
 var Hello = require('./components/hello.jsx');
 var Signup = require('./components/signup.jsx');
+var Login = require('./components/login.jsx');
 
 module.exports = (
   <Route name="app" path="/" handler={App}>
     <DefaultRoute handler={Hello} />
     <Route name="signup" path="/signup" handler={Signup}/>
+    <Route name="login" path="/login" handler={Login}/>
   </Route>
 );

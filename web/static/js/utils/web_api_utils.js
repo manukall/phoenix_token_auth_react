@@ -41,7 +41,7 @@ module.exports = {
 
   login: function(email, password) {
     request.post(APIEndpoints.LOGIN)
-      .send({ username: email, password: password, grant_type: 'password' })
+      .send({ email: email, password: password })
       .set('Accept', 'application/json')
       .end(function(error, res){
         if (res) {
