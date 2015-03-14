@@ -1,11 +1,12 @@
 module.exports = {
-    entry: "./web/static/js/app.js",
+    entry: "./web/static/js/app.jsx",
     output: {
         path: "./priv/static/js",
         filename: "bundle.js"
     },
     module: {
         loaders: [
+          { test: /\.jsx$/, loader: "jsx-loader" },
           { test: /\.css$/, loader: "style!css" },
           { test: /\.less$/, loader: "style!css!less" },
           { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,   loader: "url?limit=10000&minetype=application/font-woff" },
