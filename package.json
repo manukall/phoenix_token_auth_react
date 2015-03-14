@@ -1,0 +1,31 @@
+{
+  "name": "phoenix_webpack",
+  "version": "0.0.0",
+  "description": "To start your new Phoenix application:",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.2",
+    "css-loader": "^0.9.1",
+    "file-loader": "^0.8.1",
+    "flux": "^2.0.1",
+    "jsx-loader": "^0.12.2",
+    "keymirror": "^0.1.1",
+    "less": "^2.4.0",
+    "less-loader": "^2.1.0",
+    "object-assign": "^2.0.0",
+    "react": "<0.13.0",
+    "react-router": "^0.12.4",
+    "style-loader": "^0.8.3",
+    "url-loader": "^0.5.5",
+    "webpack": "^1.7.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

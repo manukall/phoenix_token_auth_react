@@ -1,8 +1,7 @@
 require('../css/app.less');
 var React = require('react');
-var Hello = require('./hello.jsx');
+var router = require('./stores/router_store.jsx').getRouter();
 
-React.render(
-  <Hello />,
-  document.getElementById('app')
-);
+router.run(function (Handler, state) {
+  React.render(<Handler/>, document.getElementById('app'));
+});
