@@ -25,6 +25,7 @@ defmodule PhoenixWebpack.Mixfile do
     [{:phoenix, "~> 0.10.0"},
      {:phoenix_ecto, "~> 0.1"},
      {:postgrex, ">= 0.0.0"},
+     {:phoenix_token_auth, ">= 0.0.2"},
      {:cowboy, "~> 1.0"}]
   end
 end

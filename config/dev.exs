@@ -33,3 +33,11 @@ config :phoenix_webpack, PhoenixWebpack.Repo,
   username: "postgres",
   password: "postgres",
   database: "phoenix_webpack_dev"
+
+config :phoenix_token_auth,
+  token_secret: "the_very_secret_token",                                     # secret string used to sign the authentication token
+  email_sender: "mk@manukall.de",                                         # sender address of emails sent by the app
+  welcome_email_subject: fn user -> "Hello #{user.email}" end,               # function returning the subject of a welcome email
+  welcome_email_body: fn user, confirmation_token -> confirmation_token end, # function returning the body of a welcome email
+  mailgun_domain: ***REMOVED***,                                              # domain of your mailgun account
+  mailgun_key: ***REMOVED***                                                      # secret key of your mailgun account

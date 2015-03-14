@@ -19,6 +19,7 @@
     "react": "<0.13.0",
     "react-router": "^0.12.4",
     "style-loader": "^0.8.3",
+    "superagent": "^1.1.0",
     "url-loader": "^0.5.5",
     "webpack": "^1.7.3"
   },
