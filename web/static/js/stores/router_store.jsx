@@ -8,6 +8,8 @@ var ActionTypes = Constants.ActionTypes;
 var Router = require('react-router');
 var routes = require('../routes.jsx');
 
+var SessionStore = require('../stores/session_store.jsx');
+
 var router = Router.create({
   routes: routes,
   location: null // Router.HistoryLocation
@@ -45,6 +47,12 @@ RouteStore.dispatchToken = Dispatcher.register(function(payload) {
 
     case ActionTypes.REDIRECT:
       router.transitionTo(action.route);
+      break;
+
+    case ActionTypes.LOGIN_RESPONSE:
+      if (SessionStore.isLoggedIn()) {
+        router.transitionTo('app');
+      }
       break;
 
     default:
