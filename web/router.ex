@@ -29,6 +29,13 @@ defmodule PhoenixTokenAuthReact.Router do
     PhoenixTokenAuth.mount
   end
 
+  scope "/api/v1", PhoenixTokenAuthReact do
+    pipe_through :api
+    pipe_through :authenticated
+
+    resources "secrets", SecretsController, only: [:index]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", PhoenixTokenAuthReact do
   #   pipe_through :api

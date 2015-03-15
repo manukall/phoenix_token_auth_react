@@ -71,6 +71,18 @@ module.exports = {
           }
         }
       });
+  },
+
+  loadSecrets: function() {
+    request.get(APIEndpoints.SECRETS)
+      .set('Accept', 'application/json')
+      .set('Authorization', "Bearer " + sessionStorage.getItem('accessToken'))
+      .end(function(error, res){
+        if (res) {
+          json = JSON.parse(res.text);
+          ServerActionCreators.receiveSecrets(json);
+        }
+      });
   }
 
 };

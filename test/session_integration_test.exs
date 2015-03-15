@@ -4,15 +4,23 @@ defmodule SessionIntegrationTest do
 
   alias PhoenixTokenAuthReact.Repo
   alias PhoenixTokenAuthReact.User
+  alias PhoenixTokenAuthReact.Secret
 
   hound_session
 
   @email "user@example.com"
   @password "123456"
+  @secret_text "The very secret text"
 
   test "signing up, confirming and logging in" do
     Repo.delete_all User
+    Repo.delete_all Secret
+    Repo.insert %Secret{text: @secret_text}
+
     navigate_to("/")
+    find_element(:css, "body")
+    |> visible_text
+    |> (fn text -> assert !String.contains?(text, @secret_text) end).()
 
     # sign in as non exsiting user
     fill_in("inputEmail", @email)
@@ -60,6 +68,10 @@ defmodule SessionIntegrationTest do
       user = Repo.one User
       assert user.confirmed_at != nil
     end
+
+    find_element(:css, "body")
+    |> visible_text
+    |> (fn text -> assert String.contains?(text, @secret_text) end).()
 
     # Log out
     find_element(:link_text, "Logout")

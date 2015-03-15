@@ -28,4 +28,12 @@ module.exports = {
       errors: errors
     });
   },
+
+  receiveSecrets: function(json, errors) {
+    Dispatcher.handleServerAction({
+      type: ActionTypes.RECEIVE_SECRETS,
+      json: json,
+      errors: errors
+    });
+  },
 };

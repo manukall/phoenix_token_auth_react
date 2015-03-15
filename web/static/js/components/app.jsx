@@ -6,7 +6,7 @@ var Header = require('./header.jsx');
 var App = React.createClass({
   render: function() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         <Header />
         <RouteHandler/>
       </div>
