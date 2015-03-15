@@ -36,8 +36,8 @@ config :phoenix_webpack, PhoenixWebpack.Repo,
 
 config :phoenix_token_auth,
   token_secret: "the_very_secret_token",                                     # secret string used to sign the authentication token
-  email_sender: "mk@manukall.de",                                         # sender address of emails sent by the app
+  email_sender: "coolapp@example.com",                                         # sender address of emails sent by the app
   welcome_email_subject: fn user -> "Hello #{user.email}" end,               # function returning the subject of a welcome email
   welcome_email_body: &PhoenixWebpack.User.signup_email_body/2, # function returning the body of a welcome email
-  mailgun_domain: ***REMOVED***,                                              # domain of your mailgun account
-  mailgun_key: ***REMOVED***                                                      # secret key of your mailgun account
+  mailgun_domain: System.get_env("MAILGUN_DOMAIN"),                                              # domain of your mailgun account
+  mailgun_key: System.get_env("MAILGUN_KEY")                                                       # secret key of your mailgun account
