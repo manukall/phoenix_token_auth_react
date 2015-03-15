@@ -57,6 +57,7 @@ RouteStore.dispatchToken = Dispatcher.register(function(payload) {
       break;
 
     case ActionTypes.SIGNUP_RESPONSE:
+    case ActionTypes.LOGOUT:
       router.transitionTo('login');
       break;
 
