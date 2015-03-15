@@ -1,3 +1,3 @@
-defmodule PhoenixWebpack.LayoutView do
-  use PhoenixWebpack.Web, :view
+defmodule PhoenixTokenAuthReact.LayoutView do
+  use PhoenixTokenAuthReact.Web, :view
 end

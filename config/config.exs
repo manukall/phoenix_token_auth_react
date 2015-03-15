@@ -6,11 +6,11 @@
 use Mix.Config
 
 # Configures the endpoint
-config :phoenix_webpack, PhoenixWebpack.Endpoint,
+config :phoenix_token_auth_react, PhoenixTokenAuthReact.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "irHs4NmgBDnstdtPY3us3DnZwKIVExJU59+Qy2Knb0dIgnr01YEWJnTpLdH3wb+S",
   debug_errors: false,
-  pubsub: [name: PhoenixWebpack.PubSub,
+  pubsub: [name: PhoenixTokenAuthReact.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -19,8 +19,8 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :phoenix_token_auth,
-  user_model: PhoenixWebpack.User,                                                    # ecto model used for authentication
-  repo: PhoenixWebpack.Repo,                                                          # ecto repo
+  user_model: PhoenixTokenAuthReact.User,                                                    # ecto model used for authentication
+  repo: PhoenixTokenAuthReact.Repo,                                                          # ecto repo
   crypto_provider: Comeonin.Bcrypt,                                          # crypto provider for hashing passwords/tokens. see http://hexdocs.pm/comeonin/
   token_validity_in_minutes: 7 * 24 * 60                                     # minutes from login until a token expires
 

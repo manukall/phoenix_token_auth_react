@@ -1,4 +1,4 @@
-defmodule PhoenixWebpack.User do
+defmodule PhoenixTokenAuthReact.User do
   use Ecto.Model
 
   schema "users" do

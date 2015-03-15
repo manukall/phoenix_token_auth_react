@@ -1,8 +1,8 @@
-defmodule PhoenixWebpack.Mixfile do
+defmodule PhoenixTokenAuthReact.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :phoenix_webpack,
+    [app: :phoenix_token_auth_react,
      version: "0.0.1",
      elixir: "~> 1.0",
      elixirc_paths: ["lib", "web"],
@@ -14,7 +14,7 @@ defmodule PhoenixWebpack.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [mod: {PhoenixWebpack, []},
+    [mod: {PhoenixTokenAuthReact, []},
      applications: [:phoenix, :cowboy, :logger]]
   end
 

@@ -1,4 +1,4 @@
-defmodule PhoenixWebpack.Repo.Migrations.CreateUsers do
+defmodule PhoenixTokenAuthReact.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do

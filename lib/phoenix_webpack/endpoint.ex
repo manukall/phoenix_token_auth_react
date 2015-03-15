@@ -1,9 +1,9 @@
-defmodule PhoenixWebpack.Endpoint do
-  use Phoenix.Endpoint, otp_app: :phoenix_webpack
+defmodule PhoenixTokenAuthReact.Endpoint do
+  use Phoenix.Endpoint, otp_app: :phoenix_token_auth_react
 
   # Serve at "/" the given assets from "priv/static" directory
   plug Plug.Static,
-    at: "/", from: :phoenix_webpack,
+    at: "/", from: :phoenix_token_auth_react,
     only: ~w(css images js favicon.ico robots.txt)
 
   plug Plug.Logger
@@ -22,9 +22,9 @@ defmodule PhoenixWebpack.Endpoint do
 
   plug Plug.Session,
     store: :cookie,
-    key: "_phoenix_webpack_key",
+    key: "_phoenix_token_auth_react_key",
     signing_salt: "o2gfQ0lF",
     encryption_salt: "iDDXM/C4"
 
-  plug :router, PhoenixWebpack.Router
+  plug :router, PhoenixTokenAuthReact.Router
 end

@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :phoenix_webpack, PhoenixWebpack.Endpoint,
+config :phoenix_token_auth_react, PhoenixTokenAuthReact.Endpoint,
   http: [port: 4001],
   server: false
 
@@ -10,10 +10,10 @@ config :phoenix_webpack, PhoenixWebpack.Endpoint,
 config :logger, level: :warn
 
 # Configure your database
-config :phoenix_webpack, PhoenixWebpack.Repo,
+config :phoenix_token_auth_react, PhoenixTokenAuthReact.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "phoenix_webpack_test",
+  database: "phoenix_token_auth_react_test",
   size: 1,
   max_overflow: false

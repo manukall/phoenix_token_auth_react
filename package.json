@@ -1,5 +1,5 @@
 {
-  "name": "phoenix_webpack",
+  "name": "phoenix_token_auth_react",
   "version": "0.0.0",
   "description": "To start your new Phoenix application:",
   "main": "webpack.config.js",

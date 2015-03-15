@@ -1,3 +1,3 @@
-defmodule PhoenixWebpack.PageView do
-  use PhoenixWebpack.Web, :view
+defmodule PhoenixTokenAuthReact.PageView do
+  use PhoenixTokenAuthReact.Web, :view
 end

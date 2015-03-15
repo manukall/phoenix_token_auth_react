@@ -1,12 +1,12 @@
-defmodule PhoenixWebpack.Web do
+defmodule PhoenixTokenAuthReact.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use PhoenixWebpack.Web, :controller
-      use PhoenixWebpack.Web, :view
+      use PhoenixTokenAuthReact.Web, :controller
+      use PhoenixTokenAuthReact.Web, :view
 
   Keep the definitions in this module short and clean,
   mostly focused on imports, uses and aliases.
@@ -17,7 +17,7 @@ defmodule PhoenixWebpack.Web do
       use Phoenix.View, root: "web/templates"
 
       # Import URL helpers from the router
-      import PhoenixWebpack.Router.Helpers
+      import PhoenixTokenAuthReact.Router.Helpers
 
       # Import all HTML functions (forms, tags, etc)
       use Phoenix.HTML
@@ -29,10 +29,10 @@ defmodule PhoenixWebpack.Web do
       use Phoenix.Controller
 
       # Alias the data repository as a convenience
-      alias PhoenixWebpack.Repo
+      alias PhoenixTokenAuthReact.Repo
 
       # Import URL helpers from the router
-      import PhoenixWebpack.Router.Helpers
+      import PhoenixTokenAuthReact.Router.Helpers
     end
   end
 

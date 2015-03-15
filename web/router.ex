@@ -1,4 +1,4 @@
-defmodule PhoenixWebpack.Router do
+defmodule PhoenixTokenAuthReact.Router do
   use Phoenix.Router
   require PhoenixTokenAuth
 
@@ -17,7 +17,7 @@ defmodule PhoenixWebpack.Router do
     plug PhoenixTokenAuth.Plug
   end
 
-  scope "/", PhoenixWebpack do
+  scope "/", PhoenixTokenAuthReact do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
@@ -30,7 +30,7 @@ defmodule PhoenixWebpack.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", PhoenixWebpack do
+  # scope "/api", PhoenixTokenAuthReact do
   #   pipe_through :api
   # end
 end

@@ -1,4 +1,4 @@
-# PhoenixWebpack
+# PhoenixTokenAuthReact
 
 To start your new Phoenix application:
 

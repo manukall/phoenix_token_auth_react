@@ -1,5 +1,5 @@
-defmodule PhoenixWebpack.PageController do
-  use PhoenixWebpack.Web, :controller
+defmodule PhoenixTokenAuthReact.PageController do
+  use PhoenixTokenAuthReact.Web, :controller
 
   plug :action
 

@@ -1,4 +1,4 @@
-defmodule PhoenixWebpackTest do
+defmodule PhoenixTokenAuthReactTest do
   use ExUnit.Case
 
   test "the truth" do

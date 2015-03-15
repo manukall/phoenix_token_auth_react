@@ -1,5 +1,5 @@
-defmodule PhoenixWebpack.ErrorView do
-  use PhoenixWebpack.Web, :view
+defmodule PhoenixTokenAuthReact.ErrorView do
+  use PhoenixTokenAuthReact.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found - 404"
