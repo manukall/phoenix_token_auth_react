@@ -15,8 +15,12 @@ defmodule PhoenixTokenAuthReact.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {PhoenixTokenAuthReact, []},
-     applications: [:phoenix, :cowboy, :logger]]
+     applications: app_list(Mix.env) ]
   end
+
+  defp app_list(:test), do: [:hound | app_list]
+  defp app_list(_),     do: app_list
+  defp app_list, do: [:phoenix, :cowboy, :logger]
 
   # Specifies your project dependencies
   #
@@ -25,7 +29,11 @@ defmodule PhoenixTokenAuthReact.Mixfile do
     [{:phoenix, "~> 0.10.0"},
      {:phoenix_ecto, "~> 0.1"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_token_auth, ">= 0.0.2"},
-     {:cowboy, "~> 1.0"}]
+     {:phoenix_token_auth, ">= 0.0.3"},
+     # use github mailgun repo for phoenix token auth to have testing mode
+     {:mailgun, github: "chrismccord/mailgun", override: true},
+     {:cowboy, "~> 1.0"},
+     {:hound, ">= 0.6.0", only: :test},
+    ]
   end
 end

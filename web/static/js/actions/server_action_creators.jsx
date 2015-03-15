@@ -13,6 +13,14 @@ module.exports = {
     });
   },
 
+  receiveSignup: function(json, errors) {
+    Dispatcher.handleServerAction({
+      type: ActionTypes.SIGNUP_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  },
+
   receiveConfirm: function(json, errors) {
     Dispatcher.handleServerAction({
       type: ActionTypes.CONFIRM_RESPONSE,

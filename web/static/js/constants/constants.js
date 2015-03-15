@@ -1,6 +1,6 @@
 var keyMirror = require('keymirror');
 
-var APIRoot = "http://localhost:4000/api";
+var APIRoot = "/api";
 
 module.exports = {
   APIEndpoints: {
@@ -15,12 +15,12 @@ module.exports = {
   }),
 
   ActionTypes: keyMirror({
-    // Routes
     REDIRECT: null,
     SIGNUP_REQUEST: null,
     LOGIN_REQUEST: null,
     LOGIN_RESPONSE: null,
     CONFIRM_RESPONSE: null,
+    SIGNUP_RESPONSE: null,
     LOGOUT: null
   })
 };

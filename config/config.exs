@@ -22,7 +22,10 @@ config :phoenix_token_auth,
   user_model: PhoenixTokenAuthReact.User,                                                    # ecto model used for authentication
   repo: PhoenixTokenAuthReact.Repo,                                                          # ecto repo
   crypto_provider: Comeonin.Bcrypt,                                          # crypto provider for hashing passwords/tokens. see http://hexdocs.pm/comeonin/
-  token_validity_in_minutes: 7 * 24 * 60                                     # minutes from login until a token expires
+  token_validity_in_minutes: 7 * 24 * 60,                                     # minutes from login until a token expires
+  email_sender: "coolapp@example.com",                                         # sender address of emails sent by the app
+  welcome_email_subject: fn user -> "Hello #{user.email}" end,               # function returning the subject of a welcome email
+  welcome_email_body: &PhoenixTokenAuthReact.User.signup_email_body/2 # function returning the body of a welcome email
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
