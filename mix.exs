@@ -36,4 +36,5 @@ defmodule PhoenixTokenAuthReact.Mixfile do
      {:hound, ">= 0.6.0", only: :test},
     ]
   end
+
 end
