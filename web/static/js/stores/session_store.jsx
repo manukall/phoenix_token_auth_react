@@ -46,6 +46,7 @@ SessionStore.dispatchToken = Dispatcher.register(function(payload) {
   switch(action.type) {
 
     case ActionTypes.LOGIN_RESPONSE:
+    case ActionTypes.CONFIRM_RESPONSE:
       if (action.json && action.json.token) {
         _accessToken = action.json.token;
         // Token will always live in the session, so that the API can grab it with no hassle

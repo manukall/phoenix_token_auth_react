@@ -25,6 +25,15 @@ module.exports = {
     WebAPIUtils.login(email, password);
   },
 
+  confirm: function(userId, token) {
+    Dispatcher.handleViewAction({
+      type: ActionTypes.CONFIRMATION_REQUEST,
+      userId: userId,
+      token: token
+    });
+    WebAPIUtils.confirm(userId, token);
+  },
+
   logout: function() {
     Dispatcher.handleViewAction({
       type: ActionTypes.LOGOUT

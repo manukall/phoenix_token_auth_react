@@ -39,6 +39,23 @@ module.exports = {
       });
   },
 
+  confirm: function(userId, token) {
+    request.post(APIEndpoints.CONFIRM.replace("%{userId}", userId))
+      .send({ confirmation_token: token })
+      .set('Accept', 'application/json')
+      .end(function(error, res){
+        if (res) {
+          if (res.error) {
+            var errorMsgs = _getErrors(res);
+            ServerActionCreators.receiveConfirm(null, errorMsgs);
+          } else {
+            json = JSON.parse(res.text);
+            ServerActionCreators.receiveConfirm(json, null);
+          }
+        }
+      });
+  },
+
   login: function(email, password) {
     request.post(APIEndpoints.LOGIN)
       .send({ email: email, password: password })

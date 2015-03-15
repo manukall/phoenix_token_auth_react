@@ -22,13 +22,11 @@ var Signup = React.createClass({
 
   _onSubmit: function(e) {
     e.preventDefault();
-    console.log("onsubmit");
     this.setState({ errors: [] });
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
     var passwordConfirmation = this.refs.passwordConfirmation.getDOMNode().value;
     if (password !== passwordConfirmation) {
-      console.log("no matcvht");
       this.setState({ errors: ['Password and password confirmation should match']});
     } else {
       SessionActionCreators.signup(email, password, passwordConfirmation);

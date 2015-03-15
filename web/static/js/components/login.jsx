@@ -22,7 +22,6 @@ var Login = React.createClass({
 
   _onSubmit: function(e) {
     e.preventDefault();
-    console.log("onsubmit");
     this.setState({ errors: [] });
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;

@@ -50,6 +50,7 @@ RouteStore.dispatchToken = Dispatcher.register(function(payload) {
       break;
 
     case ActionTypes.LOGIN_RESPONSE:
+    case ActionTypes.CONFIRM_RESPONSE:
       if (SessionStore.isLoggedIn()) {
         router.transitionTo('app');
       }

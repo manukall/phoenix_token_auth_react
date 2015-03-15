@@ -12,4 +12,12 @@ module.exports = {
       errors: errors
     });
   },
+
+  receiveConfirm: function(json, errors) {
+    Dispatcher.handleServerAction({
+      type: ActionTypes.CONFIRM_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  },
 };

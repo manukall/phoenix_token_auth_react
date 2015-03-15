@@ -9,4 +9,11 @@ defmodule PhoenixWebpack.User do
     timestamps
   end
 
+  def signup_email_body(user, confirmation_token) do
+    """
+    Please follow the link below:
+http://localhost:4000/#/users/#{user.id}/confirm/#{confirmation_token}
+    """
+  end
+
 end
