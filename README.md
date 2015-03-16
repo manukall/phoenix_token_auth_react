@@ -1,8 +1,29 @@
 # PhoenixTokenAuthReact
 
-To start your new Phoenix application:
+This is an example app using [Phoenix](http://www.phoenixframework.org), [phoenix_token_auth](https://github.com/manukall/phoenix_token_auth) and [React](https://facebook.github.io/react/index.html).
 
-1. Install dependencies with `mix deps.get`
-2. Start Phoenix endpoint with `mix phoenix.server`
+You need to have a (free) mailgun account to be able to send welcome emails.
 
-Now you can visit `localhost:4000` from your browser.
+## Running
+
+* Clone the repository and change into it's directory
+* Install dependencies:
+```Shell
+mix deps.get && npm install
+```
+* Create and migrate the database (You might need to change username/password in `config/dev.exs` before)
+```Shell
+mix do ecto.create, ecto.migrate
+```
+* Add some example data
+```Shell
+mix seed_db
+```
+* Start the server
+```Shell
+MAILGUN_DOMAIN=... MAILGUN_KEY=... mix phoenix.server
+```
+* Open your browser at http://localhost:4000 and explore.
+
+## Credits
+A lot of inspiration and code were taken from https://github.com/FancyPixel/small-frontend.
