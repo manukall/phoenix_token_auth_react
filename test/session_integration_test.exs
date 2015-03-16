@@ -31,8 +31,7 @@ defmodule SessionIntegrationTest do
     assert visible_text(element_id) =~ ~r/unknown_email_or_password/
 
     # sign up
-    find_element(:link_text, "Signup")
-    |> click
+    click_link("Signup")
 
     fill_in("inputEmail", @email)
     fill_in("inputPassword", @password)
@@ -55,9 +54,7 @@ defmodule SessionIntegrationTest do
     assert visible_text(element_id) =~ ~r/account_not_confirmed/
 
     # Confirm account
-    mail= Application.get_env(:phoenix_token_auth, :mailgun_test_file_path)
-    |> File.read!
-    |> Poison.decode!
+    mail = find_mail
     assert mail["to"] == @email
 
     Regex.run(~r/http[\S]+/, mail["text"])
@@ -74,12 +71,10 @@ defmodule SessionIntegrationTest do
     |> (fn text -> assert String.contains?(text, @secret_text) end).()
 
     # Log out
-    find_element(:link_text, "Logout")
-    |> click
+    click_link("Logout")
 
     # Log in with wrong password
-    find_element(:link_text, "Login")
-    |> click
+    click_link("Login")
     fill_in("inputEmail", @email)
     fill_in("inputPassword", "wrong")
     submit("inputPassword")
@@ -87,10 +82,47 @@ defmodule SessionIntegrationTest do
     assert visible_text(element_id) =~ ~r/unknown_email_or_password/
 
     # Log in
-    find_element(:link_text, "Login")
-    |> click
+    click_link("Login")
     fill_in("inputEmail", @email)
     fill_in("inputPassword", @password)
+    submit("inputPassword")
+
+    wait_until fn ->
+      assert length(find_all_elements(:link_text, "Logout")) > 0
+    end
+
+    # Reset password
+    click_link("Logout")
+    click_link("Login")
+    click_link("Forgot password")
+    fill_in("inputEmail", @email)
+    submit("inputEmail")
+
+    wait_until fn ->
+      user = Repo.one User
+      assert user.hashed_password_reset_token != nil
+    end
+
+    mail = find_mail
+    assert mail["to"] == @email
+
+    Regex.run(~r/http[\S]+/, mail["text"])
+    |> List.last
+    |> navigate_to
+
+    new_password = "new_password"
+    fill_in("inputPassword", new_password)
+    fill_in("inputPasswordConfirmation", new_password)
+    submit("inputPassword")
+
+    wait_until fn ->
+      assert length(find_all_elements(:link_text, "Logout")) > 0
+    end
+
+    click_link("Logout")
+    click_link("Login")
+    fill_in("inputEmail", @email)
+    fill_in("inputPassword", new_password)
     submit("inputPassword")
 
     wait_until fn ->
@@ -109,6 +141,11 @@ defmodule SessionIntegrationTest do
     |> submit_element
   end
 
+  defp click_link(text) do
+    find_element(:link_text, text)
+    |> click
+  end
+
   defp wait_until(sleep \\ 50, retries \\ 10, function)
   defp wait_until(_sleep, 0, function), do: function.()
   defp wait_until(sleep, retries, function) do
@@ -118,6 +155,12 @@ defmodule SessionIntegrationTest do
         :timer.sleep(sleep)
         wait_until(sleep, retries - 1, function)
     end
+  end
+
+  defp find_mail do
+    Application.get_env(:phoenix_token_auth, :mailgun_test_file_path)
+    |> File.read!
+    |> Poison.decode!
   end
 
 end

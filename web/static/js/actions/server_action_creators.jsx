@@ -36,4 +36,20 @@ module.exports = {
       errors: errors
     });
   },
+
+  receiveForgotPassword: function(json, errors) {
+    Dispatcher.handleServerAction({
+      type: ActionTypes.FORGOT_PASSWORD_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  },
+
+  receiveResetPassword: function(json, errors) {
+    Dispatcher.handleServerAction({
+      type: ActionTypes.RESET_PASSWORD_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  },
 };
