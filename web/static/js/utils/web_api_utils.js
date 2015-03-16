@@ -73,6 +73,40 @@ module.exports = {
       });
   },
 
+  forgotPassword: function(email) {
+    request.post(APIEndpoints.FORGOT_PASSWORD)
+      .send({ email: email })
+      .set('Accept', 'application/json')
+      .end(function(error, res){
+        if (res) {
+          if (res.error) {
+            var errorMsgs = _getErrors(res);
+            ServerActionCreators.receiveForgotPassword(null, errorMsgs);
+          } else {
+            json = JSON.parse(res.text);
+            ServerActionCreators.receiveForgotPassword(json, null);
+          }
+        }
+      });
+  },
+
+  resetPassword: function(userId, resetToken, password) {
+    request.post(APIEndpoints.RESET_PASSWORD)
+      .send({ user_id: userId, password_reset_token: resetToken, password: password })
+      .set('Accept', 'application/json')
+      .end(function(error, res){
+        if (res) {
+          if (res.error) {
+            var errorMsgs = _getErrors(res);
+            ServerActionCreators.receiveResetPassword(null, errorMsgs);
+          } else {
+            json = JSON.parse(res.text);
+            ServerActionCreators.receiveResetPassword(json, null);
+          }
+        }
+      });
+  },
+
   loadSecrets: function() {
     request.get(APIEndpoints.SECRETS)
       .set('Accept', 'application/json')

@@ -7,6 +7,8 @@ var App = require('./components/app.jsx');
 var SecretsList = require('./components/secrets_list.jsx');
 var Signup = require('./components/signup.jsx');
 var Login = require('./components/login.jsx');
+var ForgotPasswort = require('./components/forgot_password.jsx');
+var PasswordReset = require('./components/password_reset.jsx');
 var Confirm = require('./components/confirm.jsx');
 
 module.exports = (
@@ -15,5 +17,7 @@ module.exports = (
     <Route name="signup" path="/signup" handler={Signup}/>
     <Route name="login" path="/login" handler={Login}/>
     <Route name="confirm" path="/users/:userId/confirm/:token" handler={Confirm}/>
+    <Route name="forgot_password" path="/forgot_password" handler={ForgotPasswort}/>
+    <Route name="password_reset" path="/users/:userId/reset_password/:resetToken" handler={PasswordReset}/>
   </Route>
 );

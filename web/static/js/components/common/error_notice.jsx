@@ -6,9 +6,9 @@ var ErrorNotice = React.createClass({
       <div className="row">
         <div className="alert alert-danger col-lg-6 col-lg-offset-3" role="alert">
           <ul>
-            {this.props.errors.map(function(error, index){
-              return <li className="error-notice__error" key={"error-"+index}>{error}</li>;
-             })}
+            {Object.keys(this.props.errors).map(function(error, index){
+              return <li className="error-notice__error" key={"error-"+index}>{error}: {this.props.errors[error]}</li>;
+             }.bind(this))}
           </ul>
         </div>
       </div>

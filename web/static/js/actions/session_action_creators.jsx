@@ -34,6 +34,24 @@ module.exports = {
     WebAPIUtils.confirm(userId, token);
   },
 
+  forgotPassword: function(email) {
+    Dispatcher.handleViewAction({
+      type: ActionTypes.FORGOT_PASSWORD_REQUEST,
+      email: email
+    });
+    WebAPIUtils.forgotPassword(email);
+  },
+
+  resetPassword: function(userId, resetToken, password) {
+    Dispatcher.handleViewAction({
+      type: ActionTypes.SIGNUP_REQUEST,
+      userId: userId,
+      resetToken: resetToken,
+      password: password
+    });
+    WebAPIUtils.resetPassword(userId, resetToken, password);
+  },
+
   logout: function() {
     Dispatcher.handleViewAction({
       type: ActionTypes.LOGOUT

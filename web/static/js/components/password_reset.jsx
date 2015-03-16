@@ -1,11 +1,13 @@
 var React = require('react');
-var Link = require('react-router').Link;
-
+var State = require('react-router').State;
 var SessionStore = require('../stores/session_store.jsx');
 var SessionActionCreators = require('../actions/session_action_creators.jsx');
 var ErrorNotice = require('../components/common/error_notice.jsx');
 
-var Login = React.createClass({
+
+var PasswordReset = React.createClass({
+  mixins: [State],
+
   getInitialState: function() {
     return { errors: [] };
   },
@@ -25,34 +27,36 @@ var Login = React.createClass({
   _onSubmit: function(e) {
     e.preventDefault();
     this.setState({ errors: [] });
-    var email = this.refs.email.getDOMNode().value;
+    var userId = this.getParams().userId;
+    var resetToken = this.getParams().resetToken;
     var password = this.refs.password.getDOMNode().value;
+    var passwordConfirmation = this.refs.passwordConfirmation.getDOMNode().value;
 
-    SessionActionCreators.login(email, password);
+    if (password === passwordConfirmation) {
+      SessionActionCreators.resetPassword(userId, resetToken, password);
+    } else {
+      this.setState({ errors: ['Password and password confirmation should match']});
+    }
   },
 
   render: function() {
-    var errors = (this.state.errors.length > 0) ? <ErrorNotice errors={this.state.errors}/> : <div></div>;
+    var errors = (Object.keys(this.state.errors).length > 0) ? <ErrorNotice errors={this.state.errors}/> : <div></div>;
+
     return (
       <div>
         {errors}
 
         <div className="row">
           <form className="form-signin" onSubmit={this._onSubmit}>
-            <h2 className="form-signin-heading">Please log in below</h2>
-
-            <label htmlFor="inputEmail" className="sr-only">Email address</label>
-            <input ref="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" required autofocus />
+            <h2 className="form-signin-heading">Please choose a new password</h2>
 
             <label htmlFor="inputPassword" className="sr-only">Password</label>
             <input ref="password" type="password" id="inputPassword" className="form-control" placeholder="Password" required />
 
-            <button className="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+            <label htmlFor="inputPasswordConfirmation" className="sr-only">Password confirmation</label>
+            <input ref="passwordConfirmation" type="password" id="inputPasswordConfirmation" className="form-control" placeholder="Password confirmation" required />
 
-            <div className="row">
-              <Link to="forgot_password">Forgot password</Link>
-            </div>
-
+            <button className="btn btn-lg btn-primary btn-block" type="submit">Set new password</button>
           </form>
         </div>
       </div>
@@ -60,4 +64,4 @@ var Login = React.createClass({
   }
 });
 
-module.exports = Login;
+module.exports = PasswordReset;
