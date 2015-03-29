@@ -27,9 +27,9 @@ defmodule PhoenixTokenAuthReact.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [{:phoenix, "~> 0.10.0"},
-     {:phoenix_ecto, "~> 0.1"},
+     {:phoenix_ecto, "~> 0.2"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_token_auth, "0.0.5"},
+     {:phoenix_token_auth, "0.0.6"},
      # use github mailgun repo for phoenix token auth to have testing mode
      {:mailgun, github: "chrismccord/mailgun", override: true},
      {:cowboy, "~> 1.0"},
