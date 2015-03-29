@@ -27,7 +27,8 @@ config :phoenix_token_auth,
   welcome_email_subject: fn user -> "Hello #{user.email}" end,
   welcome_email_body: &PhoenixTokenAuthReact.User.signup_email_body/2,
   password_reset_email_subject: fn user -> "Reset password for #{user.email}" end,
-  password_reset_email_body: &PhoenixTokenAuthReact.User.reset_password_email_body/2
+  password_reset_email_body: &PhoenixTokenAuthReact.User.reset_password_email_body/2,
+  registration_validator: &PhoenixTokenAuthReact.User.registration_validator/1
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

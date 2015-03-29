@@ -30,6 +30,19 @@ defmodule SessionIntegrationTest do
     element_id = find_element(:css, ".alert")
     assert visible_text(element_id) =~ ~r/unknown_email_or_password/
 
+    # sign up with a password that's too short
+    click_link("Signup")
+
+    fill_in("inputEmail", @email)
+    fill_in("inputPassword", "12345")
+    fill_in("inputPasswordConfirmation", "12345")
+    submit("inputPassword")
+
+    wait_until fn ->
+      element_id = find_element(:css, ".alert")
+      assert visible_text(element_id) =~ ~r/password: too_short/
+    end
+
     # sign up
     click_link("Signup")
 

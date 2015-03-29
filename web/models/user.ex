@@ -27,4 +27,11 @@ defmodule PhoenixTokenAuthReact.User do
     """
   end
 
+  def registration_validator(changeset) do
+    if String.length(changeset.params["password"]) < 6 do
+      changeset = Ecto.Changeset.add_error(changeset, :password, :too_short)
+    end
+    changeset
+  end
+
 end

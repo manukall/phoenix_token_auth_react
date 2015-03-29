@@ -8,7 +8,7 @@ function _getErrors(res) {
     if (json['errors']) {
       errorMsgs = json['errors'];
     } else if (json['error']) {
-      errorMsgs = [json['error']];
+      errorMsgs = json['error'];
     }
   }
   return errorMsgs;

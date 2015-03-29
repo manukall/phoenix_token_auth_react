@@ -5,7 +5,7 @@ var ErrorNotice = require('../components/common/error_notice.jsx');
 
 var Signup = React.createClass({
   getInitialState: function() {
-    return { errors: [] };
+    return { errors: null };
   },
 
   componentDidMount: function() {
@@ -34,7 +34,8 @@ var Signup = React.createClass({
   },
 
   render: function() {
-    var errors = (this.state.errors.length > 0) ? <ErrorNotice errors={this.state.errors}/> : <div></div>;
+    console.dir(this.state.errors);
+    var errors = (this.state.errors !== null) ? <ErrorNotice errors={this.state.errors}/> : <div></div>;
     return (
       <div>
         {errors}
