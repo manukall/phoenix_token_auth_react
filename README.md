@@ -2,6 +2,8 @@
 
 This is an example app using [Phoenix](http://www.phoenixframework.org), [phoenix_token_auth](https://github.com/manukall/phoenix_token_auth) and [React](https://facebook.github.io/react/index.html).
 
+Branch master uses phoenix_token_auth's latest hex release and branch development might use a more current version of phoenix_token_auth's master branch.
+
 You need to have a (free) mailgun account to be able to send welcome emails.
 
 ## Running
