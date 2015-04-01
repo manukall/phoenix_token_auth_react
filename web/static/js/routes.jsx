@@ -10,6 +10,7 @@ var Login = require('./components/login.jsx');
 var ForgotPasswort = require('./components/forgot_password.jsx');
 var PasswordReset = require('./components/password_reset.jsx');
 var Confirm = require('./components/confirm.jsx');
+var Account = require('./components/account.jsx');
 
 module.exports = (
   <Route name="app" path="/" handler={App}>
@@ -19,5 +20,6 @@ module.exports = (
     <Route name="confirm" path="/users/:userId/confirm/:token" handler={Confirm}/>
     <Route name="forgot_password" path="/forgot_password" handler={ForgotPasswort}/>
     <Route name="password_reset" path="/users/:userId/reset_password/:resetToken" handler={PasswordReset}/>
+    <Route name="account" path="/account" handler={Account}/>
   </Route>
 );

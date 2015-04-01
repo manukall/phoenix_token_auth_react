@@ -34,7 +34,10 @@ var Header = React.createClass({
 
   render: function() {
     var sessionLinks = this.state.isLoggedIn ? (
-      <li><a href='#' onClick={this.logout}>Logout</a></li>
+      [
+        <li key="nav-link-logout"><a href='#' onClick={this.logout}>Logout</a></li>,
+        <li key="nav-link-account"><Link to="account">Account</Link></li>
+      ]
     ) : (
       [
         <li key="nav-link-signup"><Link to="signup">Signup</Link></li>,

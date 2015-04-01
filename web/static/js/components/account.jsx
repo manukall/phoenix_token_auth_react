@@ -1,37 +1,43 @@
 var React = require('react');
 var Input = require('react-bootstrap').Input;
 
-var SessionStore = require('../stores/session_store.jsx');
-var SessionActionCreators = require('../actions/session_action_creators.jsx');
+var AccountStore = require('../stores/account_store.js');
+var AccountActionCreators = require('../actions/account_action_creators.js');
 var ErrorNotice = require('../components/common/error_notice.jsx');
 
-var Signup = React.createClass({
+var Account = React.createClass({
   getInitialState: function() {
-    return { errors: {} };
+    return {
+      errors: {},
+      account: AccountStore.getAccount()
+    };
   },
 
   componentDidMount: function() {
-    SessionStore.addChangeListener(this._onChange);
+    AccountStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    SessionStore.removeChangeListener(this._onChange);
+    AccountStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function() {
-    this.setState({ errors: SessionStore.getErrors() });
+    this.setState({
+      errors: AccountStore.getErrors(),
+      account: AccountStore.getAccount()
+    });
   },
 
   _onSubmit: function(e) {
     e.preventDefault();
-    this.setState({ errors: [] });
+    this.setState({ errors: {} });
     var email = this.refs.email.getValue();
     var password = this.refs.password.getValue();
     var passwordConfirmation = this.refs.passwordConfirmation.getValue();
     if (password !== passwordConfirmation) {
       this.setState({ errors: {password_confirmation: 'Password and password confirmation should match'}});
     } else {
-      SessionActionCreators.signup(email, password);
+      AccountActionCreators.updateAccount(email, password);
     }
   },
 
@@ -43,7 +49,7 @@ var Signup = React.createClass({
 
         <div className="row">
           <form className="form-signin" onSubmit={this._onSubmit}>
-            <h2 className="form-signin-heading">Please sign up below</h2>
+            <h2 className="form-signin-heading">Update your account data below</h2>
 
             <Input ref="email"
                    type="email"
@@ -52,7 +58,8 @@ var Signup = React.createClass({
                    placeholder="Email address"
                    bsStyle={this.state.errors.email ? "error" : null}
                    help={this.state.errors.email}
-                   required
+                   key={this.state.account.email}
+                   defaultValue={this.state.account.email}
                    autofocus />
 
             <Input ref="password"
@@ -61,8 +68,7 @@ var Signup = React.createClass({
                    className="form-control"
                    placeholder="Password"
                    bsStyle={this.state.errors.password ? "error" : null}
-                   help={this.state.errors.password}
-                   required />
+                   help={this.state.errors.password} />
 
             <Input ref="passwordConfirmation"
                    type="password"
@@ -70,10 +76,9 @@ var Signup = React.createClass({
                    className="form-control"
                    placeholder="Password confirmation"
                    bsStyle={this.state.errors.password_confirmation ? "error" : null}
-                   help={this.state.errors.password_confirmation}
-                   required />
+                   help={this.state.errors.password_confirmation} />
 
-            <button className="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+            <button className="btn btn-lg btn-primary btn-block" type="submit">Save</button>
           </form>
         </div>
       </div>
@@ -81,4 +86,4 @@ var Signup = React.createClass({
   }
 });
 
-module.exports = Signup;
+module.exports = Account;

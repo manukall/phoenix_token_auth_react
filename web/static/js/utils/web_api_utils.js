@@ -18,12 +18,11 @@ var APIEndpoints = constants.APIEndpoints;
 
 module.exports = {
 
-  signup: function(email, password, passwordConfirmation) {
+  signup: function(email, password) {
     request.post(APIEndpoints.REGISTRATION)
       .send({ user: {
         email: email,
-        password: password,
-        password_confirmation: passwordConfirmation
+        password: password
       }})
       .set('Accept', 'application/json')
       .end(function(error, res) {
@@ -115,6 +114,36 @@ module.exports = {
         if (res) {
           json = JSON.parse(res.text);
           ServerActionCreators.receiveSecrets(json);
+        }
+      });
+  },
+
+  loadAccount: function() {
+    request.get(APIEndpoints.ACCOUNT)
+      .set('Accept', 'application/json')
+      .set('Authorization', "Bearer " + sessionStorage.getItem('accessToken'))
+      .end(function(error, res){
+        if (res) {
+          json = JSON.parse(res.text);
+          ServerActionCreators.receiveAccount(json);
+        }
+      });
+  },
+
+  updateAccount: function(email, password) {
+    request("PUT", APIEndpoints.ACCOUNT)
+      .send({account: { email: email, password: password}})
+      .set('Accept', 'application/json')
+      .set('Authorization', "Bearer " + sessionStorage.getItem('accessToken'))
+      .end(function(error, res){
+        if (res) {
+          if (res.error) {
+            var errorMsgs = _getErrors(res);
+            ServerActionCreators.receiveUpdateAccount(null, errorMsgs);
+          } else {
+            json = JSON.parse(res.text);
+            ServerActionCreators.receiveUpdateAccount(json, null);
+          }
         }
       });
   }

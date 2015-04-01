@@ -52,4 +52,20 @@ module.exports = {
       errors: errors
     });
   },
+
+  receiveAccount: function(json, errors) {
+    Dispatcher.handleServerAction({
+      type: ActionTypes.ACCOUNT_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  },
+
+  receiveUpdateAccount: function(json, errors) {
+    Dispatcher.handleServerAction({
+      type: ActionTypes.UPDATE_ACCOUNT_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  },
 };
