@@ -4,7 +4,8 @@ var request = require('superagent');
 
 function _getErrors(res) {
   var errorMsgs = ["Something went wrong, please try again"];
-  if ((json = JSON.parse(res.text))) {
+  var json = JSON.parse(res.text);
+  if ((json)) {
     if (json['errors']) {
       errorMsgs = json['errors'];
     } else if (json['error']) {
@@ -31,7 +32,7 @@ module.exports = {
             var errorMsgs = _getErrors(res);
             ServerActionCreators.receiveSignup(null, errorMsgs);
           } else {
-            json = JSON.parse(res.text);
+            var json = JSON.parse(res.text);
             ServerActionCreators.receiveSignup(json, null);
           }
         }
@@ -48,7 +49,7 @@ module.exports = {
             var errorMsgs = _getErrors(res);
             ServerActionCreators.receiveConfirm(null, errorMsgs);
           } else {
-            json = JSON.parse(res.text);
+            var json = JSON.parse(res.text);
             ServerActionCreators.receiveConfirm(json, null);
           }
         }
@@ -65,7 +66,7 @@ module.exports = {
             var errorMsgs = _getErrors(res);
             ServerActionCreators.receiveLogin(null, errorMsgs);
           } else {
-            json = JSON.parse(res.text);
+            var json = JSON.parse(res.text);
             ServerActionCreators.receiveLogin(json, null);
           }
         }
@@ -82,7 +83,7 @@ module.exports = {
             var errorMsgs = _getErrors(res);
             ServerActionCreators.receiveForgotPassword(null, errorMsgs);
           } else {
-            json = JSON.parse(res.text);
+            var json = JSON.parse(res.text);
             ServerActionCreators.receiveForgotPassword(json, null);
           }
         }
@@ -99,7 +100,7 @@ module.exports = {
             var errorMsgs = _getErrors(res);
             ServerActionCreators.receiveResetPassword(null, errorMsgs);
           } else {
-            json = JSON.parse(res.text);
+            var json = JSON.parse(res.text);
             ServerActionCreators.receiveResetPassword(json, null);
           }
         }
@@ -112,7 +113,7 @@ module.exports = {
       .set('Authorization', "Bearer " + sessionStorage.getItem('accessToken'))
       .end(function(error, res){
         if (res) {
-          json = JSON.parse(res.text);
+          var json = JSON.parse(res.text);
           ServerActionCreators.receiveSecrets(json);
         }
       });
@@ -124,7 +125,7 @@ module.exports = {
       .set('Authorization', "Bearer " + sessionStorage.getItem('accessToken'))
       .end(function(error, res){
         if (res) {
-          json = JSON.parse(res.text);
+          var json = JSON.parse(res.text);
           ServerActionCreators.receiveAccount(json);
         }
       });
@@ -141,7 +142,7 @@ module.exports = {
             var errorMsgs = _getErrors(res);
             ServerActionCreators.receiveUpdateAccount(null, errorMsgs);
           } else {
-            json = JSON.parse(res.text);
+            var json = JSON.parse(res.text);
             ServerActionCreators.receiveUpdateAccount(json, null);
           }
         }

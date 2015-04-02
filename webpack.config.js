@@ -6,7 +6,7 @@ module.exports = {
     },
     module: {
         loaders: [
-          { test: /\.jsx$/, loader: "jsx-loader" },
+          { test: /\.jsx?$/, loader: "babel-loader" },
           { test: /\.css$/, loader: "style!css" },
           { test: /\.less$/, loader: "style!css!less" },
           { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,   loader: "url?limit=10000&minetype=application/font-woff" },
