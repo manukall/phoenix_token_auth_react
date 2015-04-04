@@ -1,41 +1,16 @@
-var React = require('react');
-var Link = require('react-router').Link;
-var SessionStore = require('../stores/session_store.jsx');
-var SessionActionCreators = require('../actions/session_action_creators.jsx');
+import React from 'react';
+import {Link} from 'react-router';
 
-
-function getStateFromStores() {
-  return {
-    isLoggedIn: SessionStore.isLoggedIn()
-  };
-}
-
-var Header = React.createClass({
-  getInitialState: function() {
-    return getStateFromStores();
-  },
-
-  componentDidMount: function() {
-    SessionStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
-    SessionStore.removeChangeListener(this._onChange);
-  },
-
-  _onChange: function() {
-    this.setState(getStateFromStores());
-  },
-
-  logout: function(e) {
+class Header extends React.Component {
+  _logout(e) {
     e.preventDefault();
-    SessionActionCreators.logout();
-  },
+    this.props.flux.getActions('SessionActions').logout();
+  }
 
-  render: function() {
-    var sessionLinks = this.state.isLoggedIn ? (
+  render() {
+    var sessionLinks = this.props.isLoggedIn ? (
       [
-        <li key="nav-link-logout"><a href='#' onClick={this.logout}>Logout</a></li>,
+        <li key="nav-link-logout"><a href='#' onClick={this._logout.bind(this)}>Logout</a></li>,
         <li key="nav-link-account"><Link to="account">Account</Link></li>
       ]
     ) : (
@@ -66,6 +41,6 @@ var Header = React.createClass({
       </nav>
     );
   }
-});
+}
 
-module.exports = Header;
+export default Header;

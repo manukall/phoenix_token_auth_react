@@ -1,17 +1,21 @@
-var React = require('react');
-var RouteHandler = require('react-router').RouteHandler;
+import React from 'react';
+import {RouteHandler} from 'react-router';
 
-var Header = require('./header.jsx');
+import Header from './header.jsx';
+import FluxComponent from "flummox/component";
 
-var App = React.createClass({
-  render: function() {
+class App extends React.Component {
+  render() {
     return (
       <div className="container">
-        <Header />
+        <FluxComponent connectToStores={{SessionsStore:
+                                        store => ({isLoggedIn: store.isLoggedIn()})}}>
+          <Header />
+        </FluxComponent>
         <RouteHandler/>
       </div>
     );
   }
-});
+}
 
-module.exports = App;
+export default App;

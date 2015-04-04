@@ -1,44 +1,26 @@
-var React = require('react');
-var Link = require('react-router').Link;
+import React from 'react';
+import {Link} from 'react-router';
+import ErrorNotice from '../components/common/error_notice.jsx';
 
-var SessionStore = require('../stores/session_store.jsx');
-var SessionActionCreators = require('../actions/session_action_creators.jsx');
-var ErrorNotice = require('../components/common/error_notice.jsx');
+import FluxComponent from 'flummox/component';
 
-var Login = React.createClass({
-  getInitialState: function() {
-    return { errors: {} };
-  },
-
-  componentDidMount: function() {
-    SessionStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
-    SessionStore.removeChangeListener(this._onChange);
-  },
-
-  _onChange: function() {
-    this.setState({ errors: SessionStore.getErrors() });
-  },
-
-  _onSubmit: function(e) {
+class Login extends React.Component {
+  _onSubmit(e) {
     e.preventDefault();
-    this.setState({ errors: {} });
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
 
-    SessionActionCreators.login(email, password);
-  },
+    this.props.flux.getActions("SessionActions").login(email, password);
+  }
 
-  render: function() {
-    var errors = (this.state.errors.base) ? <ErrorNotice message={this.state.errors.base}/> : <div></div>;
+  render() {
+    var errors = (this.props.errors.base) ? <ErrorNotice message={this.props.errors.base}/> : <div></div>;
     return (
       <div>
         {errors}
 
         <div className="row">
-          <form className="form-signin" onSubmit={this._onSubmit}>
+          <form className="form-signin" onSubmit={this._onSubmit.bind(this)}>
             <h2 className="form-signin-heading">Please log in below</h2>
 
             <label htmlFor="inputEmail" className="sr-only">Email address</label>
@@ -58,6 +40,16 @@ var Login = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = Login;
+class LoginWrapper extends React.Component {
+  render() {
+    return (
+      <FluxComponent connectToStores={["SessionsStore"]}>
+        <Login />
+      </FluxComponent>
+    );
+  }
+}
+
+export default LoginWrapper;

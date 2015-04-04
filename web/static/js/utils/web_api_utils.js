@@ -1,6 +1,5 @@
-var ServerActionCreators = require('../actions/server_action_creators.jsx');
-var constants = require('../constants/constants.js');
-var request = require('superagent');
+import constants from '../constants/constants.js';
+import request from 'superagent';
 
 function _getErrors(res) {
   var errorMsgs = ["Something went wrong, please try again"];
@@ -17,9 +16,9 @@ function _getErrors(res) {
 
 var APIEndpoints = constants.APIEndpoints;
 
-module.exports = {
+export default {
 
-  signup: function(email, password) {
+  signup: function(flux, email, password) {
     request.post(APIEndpoints.REGISTRATION)
       .send({ user: {
         email: email,
@@ -30,16 +29,16 @@ module.exports = {
         if (res) {
           if (res.error) {
             var errorMsgs = _getErrors(res);
-            ServerActionCreators.receiveSignup(null, errorMsgs);
+                        flux.getActions("ServerActions").receiveSignup(null, errorMsgs);
           } else {
             var json = JSON.parse(res.text);
-            ServerActionCreators.receiveSignup(json, null);
+                        flux.getActions("ServerActions").receiveSignup(json, null);
           }
         }
       });
   },
 
-  confirm: function(userId, token) {
+  confirm: function(flux, userId, token) {
     request.post(APIEndpoints.CONFIRM.replace("%{userId}", userId))
       .send({ confirmation_token: token })
       .set('Accept', 'application/json')
@@ -47,16 +46,16 @@ module.exports = {
         if (res) {
           if (res.error) {
             var errorMsgs = _getErrors(res);
-            ServerActionCreators.receiveConfirm(null, errorMsgs);
+                        flux.getActions("ServerActions").receiveConfirm(null, errorMsgs);
           } else {
             var json = JSON.parse(res.text);
-            ServerActionCreators.receiveConfirm(json, null);
+                        flux.getActions("ServerActions").receiveConfirm(json, null);
           }
         }
       });
   },
 
-  login: function(email, password) {
+  login: function(flux, email, password) {
     request.post(APIEndpoints.LOGIN)
       .send({ email: email, password: password })
       .set('Accept', 'application/json')
@@ -64,16 +63,16 @@ module.exports = {
         if (res) {
           if (res.error) {
             var errorMsgs = _getErrors(res);
-            ServerActionCreators.receiveLogin(null, errorMsgs);
+            flux.getActions("ServerActions").receiveLogin(null, errorMsgs);
           } else {
             var json = JSON.parse(res.text);
-            ServerActionCreators.receiveLogin(json, null);
+            flux.getActions("ServerActions").receiveLogin(json, null);
           }
         }
       });
   },
 
-  forgotPassword: function(email) {
+  forgotPassword: function(flux, email) {
     request.post(APIEndpoints.FORGOT_PASSWORD)
       .send({ email: email })
       .set('Accept', 'application/json')
@@ -81,16 +80,16 @@ module.exports = {
         if (res) {
           if (res.error) {
             var errorMsgs = _getErrors(res);
-            ServerActionCreators.receiveForgotPassword(null, errorMsgs);
+                        flux.getActions("ServerActions").receiveForgotPassword(null, errorMsgs);
           } else {
             var json = JSON.parse(res.text);
-            ServerActionCreators.receiveForgotPassword(json, null);
+                        flux.getActions("ServerActions").receiveForgotPassword(json, null);
           }
         }
       });
   },
 
-  resetPassword: function(userId, resetToken, password) {
+  resetPassword: function(flux, userId, resetToken, password) {
     request.post(APIEndpoints.RESET_PASSWORD)
       .send({ user_id: userId, password_reset_token: resetToken, password: password })
       .set('Accept', 'application/json')
@@ -98,40 +97,40 @@ module.exports = {
         if (res) {
           if (res.error) {
             var errorMsgs = _getErrors(res);
-            ServerActionCreators.receiveResetPassword(null, errorMsgs);
+                        flux.getActions("ServerActions").receiveResetPassword(null, errorMsgs);
           } else {
             var json = JSON.parse(res.text);
-            ServerActionCreators.receiveResetPassword(json, null);
+                        flux.getActions("ServerActions").receiveResetPassword(json, null);
           }
         }
       });
   },
 
-  loadSecrets: function() {
+  loadSecrets: function(flux) {
     request.get(APIEndpoints.SECRETS)
       .set('Accept', 'application/json')
       .set('Authorization', "Bearer " + sessionStorage.getItem('accessToken'))
       .end(function(error, res){
         if (res) {
           var json = JSON.parse(res.text);
-          ServerActionCreators.receiveSecrets(json);
+                      flux.getActions("ServerActions").receiveSecrets(json);
         }
       });
   },
 
-  loadAccount: function() {
+  loadAccount: function(flux) {
     request.get(APIEndpoints.ACCOUNT)
       .set('Accept', 'application/json')
       .set('Authorization', "Bearer " + sessionStorage.getItem('accessToken'))
       .end(function(error, res){
         if (res) {
           var json = JSON.parse(res.text);
-          ServerActionCreators.receiveAccount(json);
+          flux.getActions("ServerActions").receiveAccount(json);
         }
       });
   },
 
-  updateAccount: function(email, password) {
+  updateAccount: function(flux, email, password) {
     request("PUT", APIEndpoints.ACCOUNT)
       .send({account: { email: email, password: password}})
       .set('Accept', 'application/json')
@@ -140,10 +139,10 @@ module.exports = {
         if (res) {
           if (res.error) {
             var errorMsgs = _getErrors(res);
-            ServerActionCreators.receiveUpdateAccount(null, errorMsgs);
+            flux.getActions("ServerActions").receiveUpdateAccount(null, errorMsgs);
           } else {
             var json = JSON.parse(res.text);
-            ServerActionCreators.receiveUpdateAccount(json, null);
+            flux.getActions("ServerActions").receiveUpdateAccount(json, null);
           }
         }
       });

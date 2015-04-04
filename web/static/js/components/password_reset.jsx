@@ -1,60 +1,68 @@
-var React = require('react');
-var State = require('react-router').State;
-var SessionStore = require('../stores/session_store.jsx');
-var SessionActionCreators = require('../actions/session_action_creators.jsx');
-var ErrorNotice = require('../components/common/error_notice.jsx');
+import React from 'react';
+import {Input} from 'react-bootstrap';
+import {State} from 'react-router';
+import FluxComponent from 'flummox/component';
+import _compact from "lodash/array/compact";
+
+import ErrorNotice from '../components/common/error_notice.jsx';
 
 
-var PasswordReset = React.createClass({
-  mixins: [State],
+class PasswordReset extends React.Component {
+  constructor(props) {
+    this.state = {
+      validationErrors: {}
+    };
+  }
 
-  getInitialState: function() {
-    return { errors: [] };
-  },
+  _errorsOn(field) {
+    var errors = _compact([this.state.validationErrors[field],
+                           this.props.errors[field]])
+    return errors.join(<br />);
+  }
 
-  componentDidMount: function() {
-    SessionStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
-    SessionStore.removeChangeListener(this._onChange);
-  },
-
-  _onChange: function() {
-    this.setState({ errors: SessionStore.getErrors() });
-  },
-
-  _onSubmit: function(e) {
+  _onSubmit(e) {
     e.preventDefault();
-    this.setState({ errors: [] });
-    var userId = this.getParams().userId;
-    var resetToken = this.getParams().resetToken;
-    var password = this.refs.password.getDOMNode().value;
-    var passwordConfirmation = this.refs.passwordConfirmation.getDOMNode().value;
+    this.setState({ validationErrors: {} });
+    var userId = this.context.router.getCurrentParams().userId;
+    var resetToken = this.context.router.getCurrentParams().resetToken;
+    var password = this.refs.password.getValue();
+    var passwordConfirmation = this.refs.passwordConfirmation.getValue();
 
     if (password === passwordConfirmation) {
-      SessionActionCreators.resetPassword(userId, resetToken, password);
+      this.props.flux.getActions("SessionActions").resetPassword(userId, resetToken, password);
     } else {
-      this.setState({ errors: ['Password and password confirmation should match']});
+      this.setState({ validationErrors: {password_confirmation: 'Password and password confirmation should match'}});
     }
-  },
+  }
 
-  render: function() {
-    var errors = (Object.keys(this.state.errors).length > 0) ? <ErrorNotice errors={this.state.errors}/> : <div></div>;
+  render() {
+    var errors = (this.props.errors.base) ? <ErrorNotice message={this.props.errors.base}/> : <div></div>;
 
     return (
       <div>
         {errors}
 
         <div className="row">
-          <form className="form-signin" onSubmit={this._onSubmit}>
+          <form className="form-signin" onSubmit={this._onSubmit.bind(this)}>
             <h2 className="form-signin-heading">Please choose a new password</h2>
 
-            <label htmlFor="inputPassword" className="sr-only">Password</label>
-            <input ref="password" type="password" id="inputPassword" className="form-control" placeholder="Password" required />
+            <Input ref="password"
+                   type="password"
+                   id="inputPassword"
+                   className="form-control"
+                   placeholder="Password"
+                   bsStyle={this._errorsOn("password") ? "error" : null}
+                   help={this._errorsOn("password")}
+                   required />
 
-            <label htmlFor="inputPasswordConfirmation" className="sr-only">Password confirmation</label>
-            <input ref="passwordConfirmation" type="password" id="inputPasswordConfirmation" className="form-control" placeholder="Password confirmation" required />
+            <Input ref="passwordConfirmation"
+                   type="password"
+                   id="inputPasswordConfirmation"
+                   className="form-control"
+                   placeholder="Password confirmation"
+                   bsStyle={this._errorsOn("password_confirmation") ? "error" : null}
+                   help={this._errorsOn("password_confirmation")}
+                   required />
 
             <button className="btn btn-lg btn-primary btn-block" type="submit">Set new password</button>
           </form>
@@ -62,6 +70,20 @@ var PasswordReset = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = PasswordReset;
+PasswordReset.contextTypes = {
+  router: React.PropTypes.func
+};
+
+class PasswordResetWrapper extends React.Component {
+  render() {
+    return (
+      <FluxComponent connectToStores={["SessionsStore"]}>
+        <PasswordReset />
+      </FluxComponent>
+    );
+  }
+}
+
+export default PasswordResetWrapper;

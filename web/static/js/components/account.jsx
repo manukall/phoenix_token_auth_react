@@ -1,34 +1,17 @@
-var React = require('react');
-var Input = require('react-bootstrap').Input;
+import React from 'react';
+import {Input} from 'react-bootstrap';
+import FluxComponent from "flummox/component";
 
-var AccountStore = require('../stores/account_store.js');
-var AccountActionCreators = require('../actions/account_action_creators.js');
-var ErrorNotice = require('../components/common/error_notice.jsx');
+import ErrorNotice from '../components/common/error_notice.jsx';
 
-var Account = React.createClass({
-  getInitialState: function() {
-    return {
-      errors: {},
-      account: AccountStore.getAccount()
+class Account extends React.Component {
+  constructor(props) {
+    this.state = {
+      errors: {}
     };
-  },
+  }
 
-  componentDidMount: function() {
-    AccountStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
-    AccountStore.removeChangeListener(this._onChange);
-  },
-
-  _onChange: function() {
-    this.setState({
-      errors: AccountStore.getErrors(),
-      account: AccountStore.getAccount()
-    });
-  },
-
-  _onSubmit: function(e) {
+  _onSubmit(e) {
     e.preventDefault();
     this.setState({ errors: {} });
     var email = this.refs.email.getValue();
@@ -37,18 +20,18 @@ var Account = React.createClass({
     if (password !== passwordConfirmation) {
       this.setState({ errors: {password_confirmation: 'Password and password confirmation should match'}});
     } else {
-      AccountActionCreators.updateAccount(email, password);
+      this.props.flux.getActions("AccountActions").updateAccount(email, password);
     }
-  },
+  }
 
-  render: function() {
+  render() {
     var errors = (this.state.errors.base) ? <ErrorNotice message={this.state.errors.base}/> : <div></div>;
     return (
       <div>
         {errors}
 
         <div className="row">
-          <form className="form-signin" onSubmit={this._onSubmit}>
+          <form className="form-signin" onSubmit={this._onSubmit.bind(this)}>
             <h2 className="form-signin-heading">Update your account data below</h2>
 
             <Input ref="email"
@@ -58,8 +41,8 @@ var Account = React.createClass({
                    placeholder="Email address"
                    bsStyle={this.state.errors.email ? "error" : null}
                    help={this.state.errors.email}
-                   key={this.state.account.email}
-                   defaultValue={this.state.account.email}
+                   key={this.props.account.email}
+                   defaultValue={this.props.account.email}
                    autofocus />
 
             <Input ref="password"
@@ -84,6 +67,18 @@ var Account = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = Account;
+class AccountWrapper extends React.Component {
+  render() {
+    return(
+      <FluxComponent connectToStores={["AccountStore"]}
+                     stateGetter={([accountStore]) => ({account: accountStore.getAccount()})}>
+        <Account />
+      </FluxComponent>
+    )
+  }
+}
+
+
+export default AccountWrapper;

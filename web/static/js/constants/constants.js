@@ -1,8 +1,8 @@
-var keyMirror = require('keymirror');
+import keyMirror from 'keymirror';
 
 var APIRoot = "/api";
 
-module.exports = {
+export default {
   APIEndpoints: {
     LOGIN: APIRoot + "/v1/sessions",
     REGISTRATION: APIRoot + "/v1/users",
@@ -11,27 +11,5 @@ module.exports = {
     FORGOT_PASSWORD: APIRoot + "/v1/password_resets",
     RESET_PASSWORD: APIRoot + "/v1/password_resets/reset",
     ACCOUNT: APIRoot + "/v1/account"
-  },
-
-  PayloadSources: keyMirror({
-    SERVER_ACTION: null,
-    VIEW_ACTION: null
-  }),
-
-  ActionTypes: keyMirror({
-    REDIRECT: null,
-    SIGNUP_REQUEST: null,
-    LOGIN_REQUEST: null,
-    LOGIN_RESPONSE: null,
-    CONFIRM_RESPONSE: null,
-    SIGNUP_RESPONSE: null,
-    LOAD_SECRETS: null,
-    RECEIVE_SECRETS: null,
-    FORGOT_PASSWORD_RESPONSE: null,
-    RESET_PASSWORD_RESPONSE: null,
-    ACCOUNT_RESPONSE: null,
-    UPDATE_ACCOUNT_REQUEST: null,
-    UPDATE_ACCOUNT_RESPONSE: null,
-    LOGOUT: null
-  })
+  }
 };

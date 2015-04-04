@@ -6,7 +6,12 @@ module.exports = {
     },
     module: {
         loaders: [
-          { test: /\.jsx?$/, loader: "babel-loader" },
+          { test: /\.jsx$/,
+            loaders: ['jsx?harmony', 'babel-loader'],
+            exclude: /node_modules/ },
+          { test: /\.js$/,
+            loaders: ['jsx?harmony', 'babel-loader'],
+            exclude: /node_modules/ },
           { test: /\.css$/, loader: "style!css" },
           { test: /\.less$/, loader: "style!css!less" },
           { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,   loader: "url?limit=10000&minetype=application/font-woff" },

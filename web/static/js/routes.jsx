@@ -1,20 +1,18 @@
-var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
+import React from 'react';
+import {Route, DefaultRoute} from 'react-router';
 
-var App = require('./components/app.jsx');
-var SecretsList = require('./components/secrets_list.jsx');
-var Signup = require('./components/signup.jsx');
-var Login = require('./components/login.jsx');
-var ForgotPasswort = require('./components/forgot_password.jsx');
-var PasswordReset = require('./components/password_reset.jsx');
-var Confirm = require('./components/confirm.jsx');
-var Account = require('./components/account.jsx');
+import App from './components/app.jsx';
+import Secrets from './components/secrets/secrets.jsx';
+import Signup from './components/signup.jsx';
+import Login from './components/login.jsx';
+import ForgotPasswort from './components/forgot_password.jsx';
+import PasswordReset from './components/password_reset.jsx';
+import Confirm from './components/confirm.jsx';
+import Account from './components/account.jsx';
 
-module.exports = (
+export default (
   <Route name="app" path="/" handler={App}>
-    <DefaultRoute handler={SecretsList} />
+    <DefaultRoute name="secrets" handler={Secrets} />
     <Route name="signup" path="/signup" handler={Signup}/>
     <Route name="login" path="/login" handler={Login}/>
     <Route name="confirm" path="/users/:userId/confirm/:token" handler={Confirm}/>

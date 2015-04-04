@@ -1,7 +1,18 @@
-require('../css/app.less');
-var React = require('react');
-var router = require('./stores/router_store.jsx').getRouter();
+import '../css/app.less';
+import React from 'react';
+import FluxComponent from 'flummox/component';
+import AppFlux from './flux/app_flux.js';
+
+
+let flux = new AppFlux();
+
+let router = flux.getStore("RouterStore").getRouter();
 
 router.run(function (Handler, state) {
-  React.render(<Handler/>, document.getElementById('app'));
+  React.render(
+    <FluxComponent flux={flux} connectToStores={['SessionsStore']} >
+      <Handler />
+    </FluxComponent>,
+    document.getElementById('app')
+  );
 });

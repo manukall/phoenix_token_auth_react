@@ -1,39 +1,39 @@
-var React = require('react');
-var Router = require('react-router');
+import React from "react";
+import Router from 'react-router';
+import FluxComponent from 'flummox/component';
 
-var SessionStore = require('../stores/session_store.jsx');
-var SessionActionCreators = require('../actions/session_action_creators.jsx');
+class Confirm extends React.Component {
+  componentDidMount() {
+    console.dir(this.context);
+    var userId = this.context.router.getCurrentParams().userId;
+    var token = this.context.router.getCurrentParams().token;
 
-var Confirm = React.createClass({
-  mixins: [ Router.State ],
+    this.props.flux.getActions("SessionActions").confirm(userId, token);
+  }
 
-  getInitialState: function() {
-    return { errors: [] };
-  },
-
-  componentDidMount: function() {
-    var userId = this.getParams().userId;
-    var token = this.getParams().token;
-
-    SessionStore.addChangeListener(this._onChange);
-    SessionActionCreators.confirm(userId, token);
-  },
-
-  componentWillUnmount: function() {
-    SessionStore.removeChangeListener(this._onChange);
-  },
-
-  _onChange: function() {
-    this.setState({ errors: SessionStore.getErrors() });
-  },
-
-  render: function() {
+  render() {
     return (
       <div>
         Confirming your account.
       </div>
+    )
+  }
+}
+
+Confirm.contextTypes = {
+  router: React.PropTypes.func
+};
+
+
+class ConfirmWrapper extends React.Component {
+  render() {
+    return (
+      <FluxComponent connectToStores={["SessionsStore"]}>
+        <Confirm />
+      </FluxComponent>
     );
   }
-});
+}
 
-module.exports = Confirm;
+
+export default ConfirmWrapper;

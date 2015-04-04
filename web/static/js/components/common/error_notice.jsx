@@ -1,7 +1,7 @@
-var React = require('react');
+import React from 'react';
 
-var ErrorNotice = React.createClass({
-  render: function() {
+class ErrorNotice extends React.Component {
+  render() {
     return (
       <div className="row">
         <div className="alert alert-danger col-lg-6 col-lg-offset-3" role="alert">
@@ -10,6 +10,6 @@ var ErrorNotice = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = ErrorNotice;
+export default ErrorNotice;
