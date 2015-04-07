@@ -7,7 +7,7 @@ var ErrorNotice = require('../components/common/error_notice.jsx');
 
 var Login = React.createClass({
   getInitialState: function() {
-    return { errors: [] };
+    return { errors: {} };
   },
 
   componentDidMount: function() {
@@ -24,7 +24,7 @@ var Login = React.createClass({
 
   _onSubmit: function(e) {
     e.preventDefault();
-    this.setState({ errors: [] });
+    this.setState({ errors: {} });
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
 
@@ -32,7 +32,7 @@ var Login = React.createClass({
   },
 
   render: function() {
-    var errors = (this.state.errors.length > 0) ? <ErrorNotice errors={this.state.errors}/> : <div></div>;
+    var errors = (this.state.errors.base) ? <ErrorNotice message={this.state.errors.base}/> : <div></div>;
     return (
       <div>
         {errors}

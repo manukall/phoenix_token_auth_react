@@ -17,6 +17,7 @@
     "less-loader": "^2.1.0",
     "object-assign": "^2.0.0",
     "react": "<0.13.0",
+    "react-bootstrap": "^0.16.1",
     "react-router": "^0.12.4",
     "style-loader": "^0.8.3",
     "superagent": "^1.1.0",

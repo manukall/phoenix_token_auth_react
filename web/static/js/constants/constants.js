@@ -9,7 +9,8 @@ module.exports = {
     CONFIRM: APIRoot + "/v1/users/%{userId}/confirm",
     SECRETS: APIRoot + "/v1/secrets",
     FORGOT_PASSWORD: APIRoot + "/v1/password_resets",
-    RESET_PASSWORD: APIRoot + "/v1/password_resets/reset"
+    RESET_PASSWORD: APIRoot + "/v1/password_resets/reset",
+    ACCOUNT: APIRoot + "/v1/account"
   },
 
   PayloadSources: keyMirror({
@@ -28,6 +29,9 @@ module.exports = {
     RECEIVE_SECRETS: null,
     FORGOT_PASSWORD_RESPONSE: null,
     RESET_PASSWORD_RESPONSE: null,
+    ACCOUNT_RESPONSE: null,
+    UPDATE_ACCOUNT_REQUEST: null,
+    UPDATE_ACCOUNT_RESPONSE: null,
     LOGOUT: null
   })
 };
