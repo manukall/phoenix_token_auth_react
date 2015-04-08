@@ -9,6 +9,13 @@ class ServerActions extends Actions {
     };
   }
 
+  receiveLogout(json, errors) {
+    return {
+      json: json,
+      errors: errors
+    };
+  }
+
   receiveSignup(json, errors) {
     return {
       json: json,

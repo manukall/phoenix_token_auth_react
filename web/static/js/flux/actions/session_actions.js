@@ -49,6 +49,7 @@ class SessionActions extends Actions {
   }
 
   logout() {
+    WebAPIUtils.logout(this.flux);
     return true;
   }
 

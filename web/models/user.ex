@@ -10,6 +10,7 @@ defmodule PhoenixTokenAuthReact.User do
     field :confirmed_at,                 Ecto.DateTime
     field :hashed_password_reset_token, :string
     field :unconfirmed_email,           :string
+    field :authentication_tokens,       {:array, :string}, default: []
 
     timestamps
   end

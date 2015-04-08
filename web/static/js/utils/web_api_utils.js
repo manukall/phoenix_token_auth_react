@@ -72,6 +72,23 @@ export default {
       });
   },
 
+  logout: function(flux) {
+    request("DELETE", APIEndpoints.LOGOUT)
+      .set('Accept', 'application/json')
+      .set('Authorization', "Bearer " + sessionStorage.getItem('accessToken'))
+      .end(function(error, res){
+        if (res) {
+          if (res.error) {
+            var errorMsgs = _getErrors(res);
+            flux.getActions("ServerActions").receiveLogout(null, errorMsgs);
+          } else {
+            var json = JSON.parse(res.text);
+            flux.getActions("ServerActions").receiveLogout(json, null);
+          }
+        }
+      });
+  },
+
   forgotPassword: function(flux, email) {
     request.post(APIEndpoints.FORGOT_PASSWORD)
       .send({ email: email })

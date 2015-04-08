@@ -77,14 +77,15 @@ defmodule SessionIntegrationTest do
     wait_until fn ->
       user = Repo.one User
       assert user.confirmed_at != nil
-    end
 
-    find_element(:css, "body")
-    |> visible_text
-    |> (fn text -> assert String.contains?(text, @secret_text) end).()
+      find_element(:css, "body")
+      |> visible_text
+      |> (fn text -> assert String.contains?(text, @secret_text) end).()
+    end
 
     # Log out
     click_link("Logout")
+    assert Repo.one(User).authentication_tokens == []
 
     # Log in with wrong password
     click_link("Login")

@@ -12,7 +12,7 @@
   "mailgun": {:git, "git://github.com/chrismccord/mailgun.git", "e0344955e8e58fd6be9274faed5669c844c840da", []},
   "phoenix": {:hex, :phoenix, "0.10.0"},
   "phoenix_ecto": {:hex, :phoenix_ecto, "0.2.0"},
-  "phoenix_token_auth": {:git, "git://github.com/manukall/phoenix_token_auth.git", "812af66b78e19543fd881228e26671707d4d3a5d", []},
+  "phoenix_token_auth": {:git, "git://github.com/manukall/phoenix_token_auth.git", "812af66b78e19543fd881228e26671707d4d3a5d", [branch: "save_tokens_in_db"]},
   "plug": {:hex, :plug, "0.11.1"},
   "poison": {:hex, :poison, "1.3.1"},
   "poolboy": {:hex, :poolboy, "1.4.2"},
