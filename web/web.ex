@@ -20,7 +20,7 @@ defmodule PhoenixTokenAuthReact.Web do
       import PhoenixTokenAuthReact.Router.Helpers
 
       # Import all HTML functions (forms, tags, etc)
-      use Phoenix.HTML
+      import Phoenix.Controller, only: [get_flash: 2]
     end
   end
 

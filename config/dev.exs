@@ -10,7 +10,15 @@ config :phoenix_token_auth_react, PhoenixTokenAuthReact.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   cache_static_lookup: false,
-  watchers: [{Path.expand("node_modules/webpack/bin/webpack.js"), ["--watch"]}]
+  watchers: [{Path.expand("node_modules/webpack/bin/webpack.js"), ["--watch"]}],
+  code_reloader: true,
+  live_reload: [
+    # url is optional
+    url: "ws://localhost:4000",
+    # `:patterns` replace `:paths` and are required for live reload
+    patterns: [~r{priv/static/.*(js|css|png|jpeg|jpg|gif)$},
+               ~r{web/views/.*(ex)$},
+               ~r{web/templates/.*(eex)$}]]
 
 # Watch static and templates for browser reloading.
 # *Note*: Be careful with wildcards. Larger projects
@@ -20,9 +28,6 @@ config :phoenix_token_auth_react, PhoenixTokenAuthReact.Endpoint,
   live_reload: [Path.expand("priv/static/js/app.js"),
                 Path.expand("priv/static/css/app.css"),
                 Path.expand("web/templates/**/*.eex")]
-
-# Enables code reloading for development
-config :phoenix, :code_reloader, true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
