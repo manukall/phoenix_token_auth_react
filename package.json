@@ -1,12 +1,15 @@
 {
-  "name": "phoenix_token_auth_react",
-  "version": "0.0.0",
-  "description": "To start your new Phoenix application:",
   "main": "webpack.config.js",
-  "directories": {
-    "test": "test"
+  "repository": {
   },
   "dependencies": {
+    "brunch": "^1.8.1",
+    "babel-brunch": "^5.1.1",
+    "clean-css-brunch": ">= 1.0 < 1.8",
+    "css-brunch": ">= 1.0 < 1.8",
+    "javascript-brunch": ">= 1.0 < 1.8",
+    "sass-brunch": "^1.8.10",
+    "uglify-js-brunch": ">= 1.0 < 1.8",
     "bootstrap": "^3.3.2",
     "css-loader": "^0.9.1",
     "file-loader": "^0.8.1",
@@ -23,11 +26,5 @@
     "superagent": "^1.1.0",
     "url-loader": "^0.5.5",
     "webpack": "^1.7.3"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }

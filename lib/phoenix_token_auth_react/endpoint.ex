@@ -1,19 +1,22 @@
 defmodule PhoenixTokenAuthReact.Endpoint do
   use Phoenix.Endpoint, otp_app: :phoenix_token_auth_react
 
-  # Serve at "/" the given assets from "priv/static" directory
+  # Serve at "/" the static files from "priv/static" directory.
+  #
+  # You should set gzip to true if you are running phoenix.digest
+  # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :phoenix_token_auth_react,
+    at: "/", from: :phoenix_token_auth_react, gzip: false,
     only: ~w(css images js favicon.ico robots.txt)
 
-  plug Plug.Logger
-
-  # Code reloading will only work if the :code_reloader key of
-  # the :phoenix application is set to true in your config file.
+  # Code reloading can be explicitly enabled under the
+  # :code_reloader configuration of your endpoint.
   if code_reloading? do
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
   end
+
+  plug Plug.Logger
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
@@ -26,8 +29,7 @@ defmodule PhoenixTokenAuthReact.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_phoenix_token_auth_react_key",
-    signing_salt: "o2gfQ0lF",
-    encryption_salt: "iDDXM/C4"
+    signing_salt: "Ho6g8anC"
 
   plug :router, PhoenixTokenAuthReact.Router
 end

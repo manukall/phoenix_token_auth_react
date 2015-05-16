@@ -7,9 +7,9 @@ use Mix.Config
 
 # Configures the endpoint
 config :phoenix_token_auth_react, PhoenixTokenAuthReact.Endpoint,
-  root: Path.expand("..", __DIR__),
   url: [host: "localhost"],
-  secret_key_base: "irHs4NmgBDnstdtPY3us3DnZwKIVExJU59+Qy2Knb0dIgnr01YEWJnTpLdH3wb+S",
+  root: Path.dirname(__DIR__),
+  secret_key_base: "zNJJ0oGwckJ4Guhn3SNrxCDzCc/7kA8U1EvBPGjKrjxoXfpwE1v8OBJpZCkKj5He",
   debug_errors: false,
   pubsub: [name: PhoenixTokenAuthReact.PubSub,
            adapter: Phoenix.PubSub.PG2]
