@@ -40,6 +40,9 @@ config :phoenix_token_auth_react, PhoenixTokenAuthReact.Repo,
   database: "phoenix_token_auth_react_dev"
 
 config :phoenix_token_auth,
-  token_secret: "the_very_secret_token",                                     # secret string used to sign the authentication token
+  email_sender: "glenn@rempe.us",
   mailgun_domain: System.get_env("MAILGUN_DOMAIN"),                                              # domain of your mailgun account
   mailgun_key: System.get_env("MAILGUN_KEY")                                                       # secret key of your mailgun account
+
+config :joken,
+  secret_key: "the_very_secret_dev_token"

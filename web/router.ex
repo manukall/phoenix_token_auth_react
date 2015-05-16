@@ -30,8 +30,8 @@ defmodule PhoenixTokenAuthReact.Router do
   end
 
   scope "/api/v1", PhoenixTokenAuthReact do
-    pipe_through :api
     pipe_through :authenticated
+    pipe_through :api
 
     resources "secrets", SecretsController, only: [:index]
   end

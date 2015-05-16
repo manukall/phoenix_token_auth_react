@@ -26,13 +26,14 @@ defmodule PhoenixTokenAuthReact.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.12.0"},
-     {:phoenix_ecto, "~> 0.3.2"},
-     {:phoenix_live_reload, "~> 0.3.3"},
+    [{:phoenix, "~> 0.13.0"},
+     {:phoenix_html, "~> 1.0"},
+     {:phoenix_ecto, "~> 0.4"},
+     {:phoenix_live_reload, "~> 0.4"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_token_auth, "0.0.7"},
-     # use github mailgun repo for phoenix token auth to have testing mode
-     {:mailgun, github: "chrismccord/mailgun", override: true},
+     # FIXME : change to canonical phoenix_token_auth release on Hex.pm when pull request is done.
+     {:phoenix_token_auth, github: "grempe/phoenix_token_auth", override: true},
+     {:mailgun, "~> 0.1.0"},
      {:cowboy, "~> 1.0"},
      {:hound, ">= 0.6.0", only: :test},
     ]
