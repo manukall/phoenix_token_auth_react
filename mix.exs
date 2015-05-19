@@ -39,8 +39,7 @@ defmodule PhoenixTokenAuthReact.Mixfile do
      {:phoenix_html, "~> 1.0"},
      {:phoenix_live_reload, "~> 0.4", only: :dev},
      {:cowboy, "~> 1.0"},
-     # FIXME : change to canonical phoenix_token_auth release on Hex.pm when pull request is done.
-     {:phoenix_token_auth, github: "grempe/phoenix_token_auth", override: true},
+     {:phoenix_token_auth, "0.0.10"},
      {:mailgun, "~> 0.1.0"},
      {:hound, ">= 0.6.0", only: :test}]
   end
