@@ -7,9 +7,9 @@ use Mix.Config
 
 # Configures the endpoint
 config :phoenix_token_auth_react, PhoenixTokenAuthReact.Endpoint,
-  root: Path.expand("..", __DIR__),
   url: [host: "localhost"],
-  secret_key_base: "irHs4NmgBDnstdtPY3us3DnZwKIVExJU59+Qy2Knb0dIgnr01YEWJnTpLdH3wb+S",
+  root: Path.dirname(__DIR__),
+  secret_key_base: "zNJJ0oGwckJ4Guhn3SNrxCDzCc/7kA8U1EvBPGjKrjxoXfpwE1v8OBJpZCkKj5He",
   debug_errors: false,
   pubsub: [name: PhoenixTokenAuthReact.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -24,7 +24,6 @@ config :phoenix_token_auth,
   repo: PhoenixTokenAuthReact.Repo,
   crypto_provider: Comeonin.Bcrypt,
   token_validity_in_minutes: 7 * 24 * 60,
-  email_sender: "coolapp@example.com",
   welcome_email_subject: fn user -> "Hello #{user.email}" end,
   welcome_email_body: &PhoenixTokenAuthReact.User.signup_email_body/2,
   password_reset_email_subject: fn user -> "Reset password for #{user.email}" end,
@@ -32,6 +31,10 @@ config :phoenix_token_auth,
   new_email_address_email_subject: fn user -> "Hello #{user.email}" end,
   new_email_address_email_body: &PhoenixTokenAuthReact.User.new_email_address_email_body/2,
   user_model_validator: &PhoenixTokenAuthReact.User.phoenix_token_auth_validator/1
+
+config :joken,
+  json_module: PhoenixTokenAuth.PoisonHelper,
+  algorithm: :HS256 # Optional. defaults to :HS256
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

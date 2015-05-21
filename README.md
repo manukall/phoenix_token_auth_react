@@ -50,3 +50,7 @@ You may also need to change the DB username/password in `config/test.exs` before
 
 ## Credits
 A lot of inspiration and code were taken from [https://github.com/FancyPixel/small-frontend](https://github.com/FancyPixel/small-frontend).
+
+## TODO
+
+* Consolidate webpack into new brunch?

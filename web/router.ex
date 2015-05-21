@@ -1,5 +1,5 @@
 defmodule PhoenixTokenAuthReact.Router do
-  use Phoenix.Router
+  use PhoenixTokenAuthReact.Web, :router
   require PhoenixTokenAuth
 
   pipeline :browser do
@@ -11,6 +11,12 @@ defmodule PhoenixTokenAuthReact.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  scope "/", PhoenixTokenAuthReact do
+    pipe_through :browser # Use the default browser stack
+
+    get "/", PageController, :index
   end
 
   pipeline :authenticated do
@@ -30,8 +36,8 @@ defmodule PhoenixTokenAuthReact.Router do
   end
 
   scope "/api/v1", PhoenixTokenAuthReact do
-    pipe_through :api
     pipe_through :authenticated
+    pipe_through :api
 
     resources "secrets", SecretsController, only: [:index]
   end

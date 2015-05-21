@@ -7,13 +7,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Phoenix!</title>
+    <title>Welcome to Phoenix!</title>
+    <!-- <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>"> -->
   </head>
 
   <body>
-
     <%= @inner %>
-
     <script src="<%= static_path(@conn, "/js/bundle.js") %>"></script>
   </body>
 </html>

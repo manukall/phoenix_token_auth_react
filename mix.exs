@@ -5,8 +5,10 @@ defmodule PhoenixTokenAuthReact.Mixfile do
     [app: :phoenix_token_auth_react,
      version: "0.0.1",
      elixir: "~> 1.0",
-     elixirc_paths: ["lib", "web"],
+     elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
+     build_embedded: Mix.env == :prod,
+     start_permanent: Mix.env == :prod,
      deps: deps]
   end
 
@@ -20,22 +22,25 @@ defmodule PhoenixTokenAuthReact.Mixfile do
 
   defp app_list(:test), do: [:hound | app_list]
   defp app_list(_),     do: app_list
-  defp app_list, do: [:phoenix, :cowboy, :logger]
+  defp app_list, do: [:phoenix, :phoenix_html, :cowboy, :logger,
+                      :phoenix_ecto, :postgrex]
+
+  # Specifies which paths to compile per environment
+  defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
+  defp elixirc_paths(_),     do: ["lib", "web"]
 
   # Specifies your project dependencies
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.12.0"},
-     {:phoenix_ecto, "~> 0.3.2"},
-     {:phoenix_live_reload, "~> 0.3.3"},
+    [{:phoenix, "~> 0.13"},
+     {:phoenix_ecto, "~> 0.4"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_token_auth, "0.0.7"},
-     # use github mailgun repo for phoenix token auth to have testing mode
-     {:mailgun, github: "chrismccord/mailgun", override: true},
+     {:phoenix_html, "~> 1.0"},
+     {:phoenix_live_reload, "~> 0.4", only: :dev},
      {:cowboy, "~> 1.0"},
-     {:hound, ">= 0.6.0", only: :test},
-    ]
+     {:phoenix_token_auth, "0.0.10"},
+     {:mailgun, "~> 0.1.0"},
+     {:hound, ">= 0.6.0", only: :test}]
   end
-
 end
