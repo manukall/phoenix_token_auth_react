@@ -79,9 +79,11 @@ defmodule SessionIntegrationTest do
       assert user.confirmed_at != nil
     end
 
-    find_element(:css, "body")
-    |> visible_text
-    |> (fn text -> assert String.contains?(text, @secret_text) end).()
+    wait_until fn ->
+      find_element(:css, "body")
+      |> visible_text
+      |> (fn text -> assert String.contains?(text, @secret_text) end).()
+    end
 
     # Log out
     click_link("Logout")
@@ -225,7 +227,7 @@ defmodule SessionIntegrationTest do
     |> click
   end
 
-  defp wait_until(sleep \\ 50, retries \\ 10, function)
+  defp wait_until(sleep \\ 100, retries \\ 10, function)
   defp wait_until(_sleep, 0, function), do: function.()
   defp wait_until(sleep, retries, function) do
     try do

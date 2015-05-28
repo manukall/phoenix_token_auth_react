@@ -22,5 +22,9 @@ config :hound, app_host: "http://localhost", app_port: 4001
 
 config :phoenix_token_auth,
   mailgun_mode: :test,
-  mailgun_test_file_path: "/tmp/ptm.mailgun",
-  token_secret: "the_very_secret_token"
+  mailgun_test_file_path: "/tmp/ptm.mailgun"
+
+config :joken,
+  # Environment specific secret key for signing tokens.
+  # This should be a very long random string.
+  secret_key: "very secret test key"
