@@ -30,7 +30,7 @@ defmodule PhoenixTokenAuthReact.Mixfile do
      {:phoenix_ecto, "~> 0.3.2"},
      {:phoenix_live_reload, "~> 0.3.3"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_token_auth, "0.0.12"},
+     {:phoenix_token_auth, "0.0.13"},
      # use github mailgun repo for phoenix token auth to have testing mode
      {:cowboy, "~> 1.0"},
      {:hound, ">= 0.6.0", only: :test},
